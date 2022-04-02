@@ -58,32 +58,33 @@ LoginForm::~LoginForm()
 
 void LoginForm::setFocus(Qt::FocusReason reason)
 {
-    if (ui->userInput->text().isEmpty()) {
+    /*if (ui->userInput->text().isEmpty()) {
         ui->userInput->setFocus(reason);
-    } else {
+    } else {*/
         ui->passwordInput->setFocus(reason);
-    }
+    //}
 }
 
 void LoginForm::initialize()
 {
-    QPixmap icon(":/resources/rqt-2.png"); // This project came from Razor-qt
-    ui->iconLabel->setPixmap(icon.scaled(ui->iconLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    ui->hostnameLabel->setText(m_Greeter.hostname());
+    //QPixmap icon(":/resources/rqt-2.png");
+    // This project came from Razor-qt
+    //ui->iconLabel->setPixmap(icon.scaled(ui->iconLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    //ui->hostnameLabel->setText(m_Greeter.hostname());
 
     ui->sessionCombo->setModel(&sessionsModel);
 
-    addLeaveEntry(power.canShutdown(), "system-shutdown", tr("Shutdown"), "shutdown");
-    addLeaveEntry(power.canRestart(), "system-reboot", tr("Restart"), "restart");
-    addLeaveEntry(power.canHibernate(), "system-suspend-hibernate", tr("Hibernate"), "hibernate");
-    addLeaveEntry(power.canSuspend(), "system-suspend", tr("Suspend"), "suspend");
-    ui->leaveComboBox->setDisabled(ui->leaveComboBox->count() <= 1);
+    //addLeaveEntry(power.canShutdown(), "system-shutdown", tr("Shutdown"), "shutdown");
+    //addLeaveEntry(power.canRestart(), "system-reboot", tr("Restart"), "restart");
+    //addLeaveEntry(power.canHibernate(), "system-suspend-hibernate", tr("Hibernate"), "hibernate");
+    //addLeaveEntry(power.canSuspend(), "system-suspend", tr("Suspend"), "suspend");
+    //ui->leaveComboBox->setDisabled(ui->leaveComboBox->count() <= 1);
 
     ui->sessionCombo->setCurrentIndex(0);
     setCurrentSession(m_Greeter.defaultSessionHint());
 
-    connect(ui->userInput, SIGNAL(editingFinished()), this, SLOT(userChanged()));
-    connect(ui->leaveComboBox, SIGNAL(activated(int)), this, SLOT(leaveDropDownActivated(int)));
+    connect(ui->userBox, SIGNAL(activated(int)), this, SLOT(userChanged()));
+    //connect(ui->leaveComboBox, SIGNAL(activated(int)), this, SLOT(leaveDropDownActivated(int)));
     connect(&m_Greeter, SIGNAL(showPrompt(QString, QLightDM::Greeter::PromptType)), this, SLOT(onPrompt(QString, QLightDM::Greeter::PromptType)));
     connect(&m_Greeter, SIGNAL(authenticationComplete()), this, SLOT(authenticationComplete()));
 
@@ -96,41 +97,42 @@ void LoginForm::initialize()
         for (int i = 0; i < usersModel.rowCount(QModelIndex()); i++) {
             knownUsers << usersModel.data(usersModel.index(i, 0), QLightDM::UsersModel::NameRole).toString();
         }
-        ui->userInput->setCompleter(new QCompleter(knownUsers));
-        ui->userInput->completer()->setCompletionMode(QCompleter::InlineCompletion);
+        ui->userBox->addItems(knownUsers);
+        //ui->userInput->setCompleter(new QCompleter(knownUsers));
+        //ui->userInput->completer()->setCompletionMode(QCompleter::InlineCompletion);
     }
 
-    QString user = Cache().getLastUser();
-    if (user.isEmpty()) {
-        user = m_Greeter.selectUserHint();
-    }
-    ui->userInput->setText(user);
+    //QString user = Cache().getLastUser();
+    //if (user.isEmpty()) {
+    //    user = m_Greeter.selectUserHint();
+    //}
+    //ui->userInput->setText(user);
     userChanged();
 }
 
 void LoginForm::userChanged()
 {
-    setCurrentSession(Cache().getLastSession(ui->userInput->text()));
+    setCurrentSession(Cache().getLastSession(ui->userBox->currentText()));
 
     if (m_Greeter.inAuthentication()) {
         m_Greeter.cancelAuthentication();
     }
-    if (! ui->userInput->text().isEmpty()) {
-        m_Greeter.authenticate(ui->userInput->text());
+    if (! ui->userBox->currentText().isEmpty()) {
+        m_Greeter.authenticate(ui->userBox->currentText());
         ui->passwordInput->setFocus();
     }
     else {
-        ui->userInput->setFocus();
+        ui->passwordInput->setFocus();
     }
 }
 
 void LoginForm::leaveDropDownActivated(int index)
 {
-    QString actionName = ui->leaveComboBox->itemData(index).toString();
+    /*QString actionName = ui->leaveComboBox->itemData(index).toString();
     if      (actionName == "shutdown") power.shutdown();
     else if (actionName == "restart") power.restart();
     else if (actionName == "hibernate") power.hibernate();
-    else if (actionName == "suspend") power.suspend();
+    else if (actionName == "suspend") power.suspend();*/
 }
 
 void LoginForm::respond()
@@ -150,7 +152,7 @@ void LoginForm::onPrompt(QString prompt, QLightDM::Greeter::PromptType promptTyp
 void LoginForm::addLeaveEntry(bool canDo, QString iconName, QString text, QString actionName)
 {
     if (canDo) {
-        ui->leaveComboBox->addItem(QIcon::fromTheme(iconName), text, actionName);
+        //ui->leaveComboBox->addItem(QIcon::fromTheme(iconName), text, actionName);
     }
 }
 
@@ -173,8 +175,8 @@ void LoginForm::setCurrentSession(QString session)
 void LoginForm::authenticationComplete()
 {
     if (m_Greeter.isAuthenticated()) {
-        Cache().setLastUser(ui->userInput->text());
-        Cache().setLastSession(ui->userInput->text(), currentSession());
+        Cache().setLastUser(ui->userBox->currentText());
+        Cache().setLastSession(ui->userBox->currentText(), currentSession());
         Cache().sync();
         m_Greeter.startSessionSync(currentSession());
     }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>325</height>
+    <width>336</width>
+    <height>261</height>
    </rect>
   </property>
   <property name="font">
@@ -20,29 +20,20 @@
    <string>LoginForm</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    border-radius: 5px;
-}
-
-#hostnameLabel {
+   <string notr="true">#hostnameLabel {
 	color: white;
 }
 
 #formFrame { 
-    background-color: rgba(80,80,80, 180);
+    background-color: palette(base);
     border-radius: 10px;
-}
-
-QComboBox,
-QPushButton {
-    border: 1px solid silver;
-    background-color: rgb(200, 200, 200);
 }
 
 QComboBox::drop-down {
     border: none;
     width: 24px;
     text-align: center;
+
 }
 
 QComboBox::down-arrow {
@@ -66,194 +57,95 @@ QComboBox::down-arrow {
       <property name="verticalSpacing">
        <number>8</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="hostnameLabel">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>10000</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bitstream Vera Sans</family>
-          <pointsize>14</pointsize>
-          <weight>50</weight>
-          <italic>true</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Hostname</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <property name="indent">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="iconLabel">
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="lightdm-qt5-greeter.qrc">:/resources/rqt-2.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>true</bool>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QLineEdit" name="userInput">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>10000</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bitstream Vera Sans</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="echoMode">
-         <enum>QLineEdit::Normal</enum>
-        </property>
-        <property name="placeholderText">
-         <string>user id</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QLineEdit" name="passwordInput">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>10000</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bitstream Vera Sans</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string>password</string>
-        </property>
-        <property name="margin" stdset="0">
-         <number>0</number>
-        </property>
-        <property name="indent" stdset="0">
-         <number>10</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QComboBox" name="sessionCombo">
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>10000</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Bitstream Vera Sans</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QComboBox::AdjustToContents</enum>
-        </property>
-        <property name="frame">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="leaveComboBox">
-        <property name="minimumSize">
-         <size>
-          <width>80</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>80</width>
-          <height>60</height>
-         </size>
+      <item row="4" column="0">
+       <layout class="QVBoxLayout" name="vLayout">
+        <property name="bottomMargin">
+         <number>6</number>
         </property>
         <item>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="lightdm-qt5-greeter.qrc">
-           <normaloff>:/resources/leaveIcon.svg</normaloff>:/resources/leaveIcon.svg</iconset>
-         </property>
+         <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Welcome</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </item>
-       </widget>
+        <item>
+         <widget class="QComboBox" name="userBox">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>30</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="passwordInput">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Bitstream Vera Sans</family>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>Password...</string>
+          </property>
+          <property name="margin" stdset="0">
+           <number>0</number>
+          </property>
+          <property name="indent" stdset="0">
+           <number>10</number>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="sessionCombo">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>30</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -261,7 +153,7 @@ QComboBox::down-arrow {
   </layout>
  </widget>
  <resources>
-  <include location="lightdm-qt5-greeter.qrc"/>
+  <include location="../../lightdm-qt5-greeter/lightdm-qt5-greeter.qrc"/>
  </resources>
  <connections/>
 </ui>

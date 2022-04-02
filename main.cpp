@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
         QCoreApplication::installTranslator(translator);
     }
 
-    if (! Settings().iconThemeName().isEmpty()) {
+    /*if (! Settings().iconThemeName().isEmpty()) {
         QIcon::setThemeName(Settings().iconThemeName());
-    }
+    }*/
 
     MainWindow *focusWindow = 0;
     for (int i = 0; i < QGuiApplication::screens().count(); ++i) {
